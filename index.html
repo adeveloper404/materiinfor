@@ -1,0 +1,862 @@
+<!doctype html>
+<html lang="id" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1200">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adeveloper Learning</title>
+    <link
+      rel="icon"
+      type="image/png"
+      href="https://lh3.googleusercontent.com/d/1tb7sFpCdE-jivYf4audtkAOg98paEctJ"
+    />
+    <link
+      rel="apple-touch-icon"
+      href="https://lh3.googleusercontent.com/d/1tb7sFpCdE-jivYf4audtkAOg98paEctJ"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      /* ================= VARIABLES (TEMA LIGHT & DARK) ================= */
+      :root[data-theme="dark"] {
+        --bg-main: #0b1121;
+        --bg-surface: #131e32;
+        --bg-control: #1e293b;
+        --text-main: #f8fafc;
+        --text-secondary: #94a3b8;
+        --accent-primary: #3b82f6;
+        --accent-secondary: #38bdf8;
+        --accent-green: #34d399;
+        --border-color: #1e293b;
+        --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        --grid-color: rgba(59, 130, 246, 0.12);
+        --ticker-bg: #2563eb;
+        --ticker-text: #ffffff;
+        --sheet-invert: invert(0.9) hue-rotate(180deg);
+      }
+
+      :root[data-theme="light"] {
+        --bg-main: #d6e8ff;
+        --bg-surface: #ffffff;
+        --bg-control: #cbd5e1;
+        --text-main: #0f172a;
+        --text-secondary: #475569;
+        --accent-primary: #1e40af;
+        --accent-secondary: #0284c7;
+        --accent-green: #059669;
+        --border-color: rgba(15, 23, 42, 0.15);
+        --shadow-sm: 0 2px 4px rgba(15, 23, 42, 0.05);
+        --shadow-md: 0 4px 10px -1px rgba(15, 23, 42, 0.08);
+        --shadow-card: 0 10px 20px -3px rgba(15, 23, 42, 0.04);
+        --grid-color: rgba(30, 64, 175, 0.05);
+        --ticker-bg: #0f172a;
+        --ticker-text: #ffffff;
+        --sheet-invert: brightness(0.95) contrast(0.95);
+      }
+
+      /* ================= RESET & BASE ================= */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease,
+          border-color 0.3s ease,
+          box-shadow 0.3s ease,
+          transform 0.2s ease;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 85px;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: var(--bg-main);
+        color: var(--text-main);
+        line-height: 1.6;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+      ul {
+        list-style: none;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      .container {
+    width: 100%;
+    max-width: 1200px; /* Tetap maksimal 1200px di layar besar, tapi mengecil di layar kecil */
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+      /* ================= NAVBAR ================= */
+      nav {
+        background-color: var(--bg-surface);
+        border-bottom: 1px solid var(--border-color);
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .nav-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 75px;
+      }
+
+      .logo {
+        font-size: 1.3rem;
+        font-weight: 800;
+        line-height: 1.1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .logo span:first-child {
+        color: var(--text-main);
+        letter-spacing: -0.5px;
+      }
+      .logo span:last-child {
+        color: var(--accent-primary);
+        font-size: 0.95rem;
+        font-weight: 600;
+      }
+
+      .nav-links {
+        display: flex;
+        gap: 2.5rem;
+        align-items: center;
+      }
+
+      .nav-links a {
+        font-weight: 600;
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        position: relative;
+        padding: 5px 0;
+      }
+
+      .nav-links a:hover,
+      .nav-links a.active {
+        color: var(--accent-primary);
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--accent-primary);
+        transition: width 0.2s ease;
+      }
+
+      .nav-links a:hover::after,
+      .nav-links a.active::after {
+        width: 100%;
+      }
+
+      .theme-toggle {
+        background-color: var(--bg-control);
+        border: 1px solid var(--border-color);
+        cursor: pointer;
+        font-size: 1.1rem;
+        color: var(--text-main);
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .theme-toggle:hover {
+        transform: translateY(-2px);
+        border-color: var(--accent-primary);
+      }
+
+      /* ================= HEADER / HERO ================= */
+      header {
+        position: relative;
+        padding: 140px 20px;
+        text-align: center;
+        background-color: var(--bg-main);
+        /* Menggabungkan garis grid tipis dengan sorotan cahaya lembut di tengah */
+        background-image:
+          radial-gradient(
+            circle at center,
+            transparent 20%,
+            var(--bg-main) 80%
+          ),
+          linear-gradient(var(--border-color) 1px, transparent 1px),
+          linear-gradient(90deg, var(--border-color) 1px, transparent 1px);
+        background-size:
+          100% 100%,
+          40px 40px,
+          40px 40px;
+        background-position: center;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .hero-title {
+        font-size: 3.8rem;
+        font-weight: 800;
+        letter-spacing: -0.04em;
+        line-height: 1.15;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(
+          135deg,
+          var(--text-main) 30%,
+          var(--accent-primary)
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* PERBAIKAN: Container Geng Tombol Kelas yang Terpisah */
+      .class-buttons-container {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 30px;
+      }
+
+      .class-select-btn {
+        background-color: var(--bg-surface);
+        color: var(--text-main);
+        border: 2px solid var(--accent-primary);
+        padding: 14px 32px;
+        font-size: 0.95rem;
+        font-weight: 700;
+        font-family: "JetBrains Mono", monospace;
+        border-radius: 12px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: var(--shadow-md);
+      }
+
+      .class-select-btn:hover {
+        background-color: var(--accent-primary);
+        color: #ffffff;
+        transform: translateY(-3px);
+        box-shadow: 0 8px 15px rgba(37, 99, 235, 0.2);
+      }
+
+      .class-select-btn.active {
+        background-color: var(--accent-primary);
+        color: #ffffff;
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      /* ================= TICKER / MARQUEE ================= */
+      .ticker-wrap {
+        background-color: var(--ticker-bg);
+        color: var(--ticker-text);
+        padding: 14px 0;
+        overflow: hidden;
+        white-space: nowrap;
+        font-family: "JetBrains Mono", monospace;
+        font-weight: 700;
+        font-size: 0.85rem;
+        letter-spacing: 2px;
+        border-top: 1px solid var(--border-color);
+        border-bottom: 1px solid var(--border-color);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .ticker-inner {
+        display: inline-block;
+        animation: ticker 30s linear infinite;
+      }
+
+      .ticker-inner span {
+        margin-right: 40px;
+      }
+
+      @keyframes ticker {
+        0% {
+          transform: translate3d(0, 0, 0);
+        }
+        100% {
+          transform: translate3d(-50%, 0, 0);
+        }
+      }
+
+      /* ================= SECTIONS UMUM ================= */
+      section {
+        padding: 90px 0;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2.6rem;
+        font-weight: 800;
+        margin-bottom: 45px;
+        letter-spacing: -1px;
+        position: relative;
+      }
+
+      .section-title::after {
+        content: "";
+        display: block;
+        width: 50px;
+        height: 4px;
+        background-color: var(--accent-primary);
+        margin: 10px auto 0 auto;
+        border-radius: 2px;
+      }
+
+      /* ================= TOPIK (SCROLL HORIZONTAL) ================= */
+      .topik-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .scroll-btn {
+        background-color: var(--bg-surface);
+        color: var(--text-main);
+        border: 1px solid var(--border-color);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        box-shadow: var(--shadow-md);
+        z-index: 2;
+        flex-shrink: 0;
+      }
+
+      .scroll-btn:hover {
+        background-color: var(--accent-primary);
+        color: #fff;
+        border-color: var(--accent-primary);
+        transform: scale(1.05);
+      }
+
+      .topik-container {
+        display: flex;
+        gap: 24px;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+        padding: 20px 5px;
+        scroll-snap-type: x mandatory;
+      }
+
+      .topik-container::-webkit-scrollbar {
+        display: none;
+      }
+
+      .topik-card {
+        flex: 0 0 225px;
+        aspect-ratio: 1 / 1;
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 24px;
+        box-shadow: var(--shadow-card);
+        scroll-snap-align: start;
+        cursor: pointer;
+      }
+
+      .topik-card:hover {
+        transform: translateY(-8px);
+        border-color: var(--accent-primary);
+        box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.1);
+      }
+
+      .topik-card i {
+        font-size: 2.8rem;
+        margin-bottom: 18px;
+      }
+
+      .topik-card h3 {
+        font-size: 1.05rem;
+        font-weight: 700;
+        color: var(--text-main);
+      }
+
+      .topik-card:nth-child(1) i {
+        color: #8b5cf6;
+      }
+      .topik-card:nth-child(2) i {
+        color: #10b981;
+      }
+      .topik-card:nth-child(3) i {
+        color: #f59e0b;
+      }
+      .topik-card:nth-child(4) i {
+        color: #ec4899;
+      }
+      .topik-card:nth-child(5) i {
+        color: #3b82f6;
+      }
+      .topik-card:nth-child(6) i {
+        color: #14b8a6;
+      }
+
+      /* ================= ABOUT & PENGEMBANG ================= */
+      .split-section {
+        display: flex;
+        align-items: center;
+        gap: 60px;
+      }
+
+      .split-content {
+        flex: 1.2;
+      }
+
+      .split-content h2 {
+        font-size: 2.6rem;
+        font-weight: 800;
+        margin-bottom: 20px;
+        letter-spacing: -1px;
+      }
+
+      .split-content p {
+        color: var(--text-secondary);
+        margin-bottom: 18px;
+        font-size: 1.05rem;
+        text-align: justify;
+      }
+
+      .split-image-container {
+        flex: 0.8;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .photo-frame {
+        width: 100%;
+        max-width: 320px;
+        aspect-ratio: 1 / 1;
+        border-radius: 24px;
+        box-shadow: var(--shadow-card);
+        background-color: var(--bg-surface);
+      }
+
+      .photo-frame:hover {
+        transform: scale(1.03);
+      }
+
+      .abstract-box {
+        width: 100%;
+        max-width: 320px;
+        aspect-ratio: 4 / 3;
+        background: linear-gradient(
+          45deg,
+          var(--bg-surface),
+          var(--bg-control)
+        );
+        border: 1px solid var(--border-color);
+        border-radius: 24px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: var(--shadow-card);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .abstract-box::after {
+        content: "</>";
+        font-family: "JetBrains Mono", monospace;
+        font-size: 4.5rem;
+        color: var(--border-color);
+        opacity: 0.6;
+        font-weight: 800;
+      }
+
+      .pengembang-section {
+        flex-direction: row-reverse;
+      }
+
+      /* --- SECTION JADWAL --- */
+      .section-header {
+        margin-bottom: 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .section-header h2 {
+        font-size: 1.6rem;
+        font-weight: 700;
+        position: relative;
+      }
+
+      .section-header h2::after {
+        content: "";
+        position: absolute;
+        bottom: -6px;
+        left: 0;
+        width: 40px;
+        height: 4px;
+        background: var(--accent-primary);
+        border-radius: 2px;
+      }
+
+      .sync-badge {
+        font-size: 0.8rem;
+        background: rgba(5, 150, 105, 0.1);
+        color: var(--accent-green);
+        padding: 0.4rem 0.8rem;
+        border-radius: 30px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.4rem;
+      }
+
+      .table-wrapper-large {
+        background-color: var(--bg-surface);
+        border: 1px solid var(--border-color);
+        border-radius: 20px;
+        box-shadow: var(--shadow-card);
+        padding: 1rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .embed-responsive-container {
+        width: 100%;
+        height: auto;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        border-radius: 14px;
+      }
+
+      .table-wrapper-large iframe {
+    width: 100%;
+    height: 520px;
+    border: none;
+    display: block;
+    border-radius: 14px;
+    background-color: transparent; 
+    filter: var(--sheet-invert);   
+    transition: filter 0.3s ease;
+}
+
+      /* ================= FOOTER ================= */
+      footer {
+        background-color: var(--bg-surface);
+        padding: 35px 20px;
+        text-align: center;
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.9rem;
+        color: var(--text-secondary);
+        border-top: 1px solid var(--border-color);
+        margin-top: auto;
+      }
+    </style>
+  </head>
+  <body>
+    <nav>
+      <div class="nav-container container">
+        <div class="logo">
+          <span>Adeveloper</span>
+          <span>Learning</span>
+        </div>
+        <ul class="nav-links">
+          <li><a href="#" class="active">Home</a></li>
+          <li><a href="#topik">Topik</a></li>
+          <li><a href="#jadwal">Jadwal</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#pengembang">Pengembang</a></li>
+        </ul>
+        <div>
+          <button
+            class="theme-toggle"
+            id="theme-toggle"
+            aria-label="Toggle Dark/Light Mode"
+          >
+            <i class="fas fa-sun"></i>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <header id="home">
+      <div class="container">
+        <h1 class="hero-title">WEB INFORMATIKA<br />EDUKASI</h1>
+        <p
+          style="
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            font-size: 1.15rem;
+            max-width: 600px;
+            margin-inline: auto;
+            font-weight: 500;
+          "
+        >
+          Website pembelajaran untuk materi Informatika. <br />Silakan pilih
+          kelas untuk memulai.
+        </p>
+
+        <div class="class-buttons-container">
+          <button
+            class="class-select-btn"
+            onclick="selectClass(this, 'Kelas X')"
+          >
+            <i class="fa-solid fa-graduation-cap"></i> Kelas X
+          </button>
+          <button
+            class="class-select-btn"
+            onclick="selectClass(this, 'Kelas XI')"
+          >
+            <i class="fa-solid fa-graduation-cap"></i> Kelas XI
+          </button>
+          <button
+            class="class-select-btn"
+            onclick="selectClass(this, 'Kelas XII')"
+          >
+            <i class="fa-solid fa-graduation-cap"></i> Kelas XII
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div class="ticker-wrap">
+      <div class="ticker-inner">
+        <span>ADEVELOPER | INFORMATIKA | EDUKASI |</span>
+        <span>ADEVELOPER | INFORMATIKA | EDUKASI |</span>
+        <span>ADEVELOPER | INFORMATIKA | EDUKASI |</span>
+        <span>ADEVELOPER | INFORMATIKA | EDUKASI |</span>
+        <span>ADEVELOPER | INFORMATIKA | EDUKASI |</span>
+        <span>ADEVELOPER | INFORMATIKA | EDUKASI |</span>
+        <span>ADEVELOPER | INFORMATIKA | EDUKASI |</span>
+        <span>ADEVELOPER | INFORMATIKA | EDUKASI |</span>
+      </div>
+    </div>
+
+    <section id="topik">
+      <div class="container">
+        <h2 class="section-title">TOPIK</h2>
+        <div class="topik-wrapper">
+          <button class="scroll-btn left" id="scroll-left">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+
+          <div class="topik-container" id="topik-container">
+            <div class="topik-card">
+              <i class="fas fa-brain"></i>
+              <h3>Berpikir Komputasional</h3>
+            </div>
+            <div class="topik-card">
+              <i class="fab fa-google"></i>
+              <h3>Google Workspace</h3>
+            </div>
+            <div class="topik-card">
+              <i class="fas fa-code"></i>
+              <h3>Algoritma Pemrograman</h3>
+            </div>
+            <div class="topik-card">
+              <i class="fas fa-network-wired"></i>
+              <h3>Jaringan Komputer</h3>
+            </div>
+            <div class="topik-card">
+              <i class="fas fa-microchip"></i>
+              <h3>Sistem Komputer</h3>
+            </div>
+            <div class="topik-card">
+              <i class="fas fa-database"></i>
+              <h3>Analisis Data</h3>
+            </div>
+          </div>
+
+          <button class="scroll-btn right" id="scroll-right">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="jadwal">
+      <div class="container">
+        <div class="section-header">
+          <h2>Jadwal Mengajar</h2>
+          <div class="sync-badge">
+            <i class="fa-solid fa-arrows-rotate"></i> Sheet Connected
+          </div>
+        </div>
+
+        <div class="table-wrapper-large">
+          <div class="embed-responsive-container">
+            <iframe
+              src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT3j0fxRzQPxG8PKmcfbySR0VcEqnv3u00BD9HYB24okoU_Zvti0Ok52Gn8RE7R3l4HFgbEW_RMjFsl/pubhtml?gid=1346901625&single=true&widget=false&headers=false&chrome=false"
+            >
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <div class="split-section">
+          <div class="split-content">
+            <h2>About</h2>
+            <p>
+              Web Informatika Edukasi adalah platform digital yang dirancang
+              khusus untuk memfasilitasi pembelajaran mata pelajaran Informatika
+              secara interaktif and modern bagi siswa-siswi.
+            </p>
+            <p>
+              Materi yang disusun mencakup kurikulum yang relevan mulai dari
+              logika dasar, pengelolaan data dengan spreadsheet, jaringan,
+              hingga perakitan sistem komputer untuk menunjang kompetensi dan
+              pemahaman teknologi.
+            </p>
+          </div>
+          <div class="split-image-container">
+            <div
+              class="photo-frame"
+              style="
+                padding: 0;
+                overflow: hidden;
+                border: 1px solid var(--border-color);
+              "
+            >
+              <img
+                src="https://lh3.googleusercontent.com/d/1zrgueA4qU2VaK14X8_pBng5gyxWe4V2q"
+                alt="Foto Adeveloper"
+                style="
+                  width: 100%;
+                  height: 100%;
+                  object-fit: cover;
+                  display: block;
+                "
+                referrerpolicy="no-referrer"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pengembang">
+      <div class="container">
+        <div class="split-section pengembang-section">
+          <div class="split-content">
+            <h2>Pengembang</h2>
+            <p>
+              Dikembangkan oleh Adeb Nizhomy, Guru Mapel Informatika, untuk
+              mendukung proses belajar mengajar yang lebih efektif, terstruktur,
+              dan mudah diakses dari mana saja.
+            </p>
+            <p>
+              Fokus utama pengembangan website ini adalah menciptakan antarmuka
+              yang bersih (<i>clean UI</i>) dan pengalaman pengguna (<i>UX</i>)
+              yang optimal bagi guru maupun siswa saat mengelola kelas dan
+              materi asesmen.
+            </p>
+          </div>
+          <div class="split-image-container">
+            <div class="abstract-box"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>© 2026 Adeveloper | Adeb Nizhomy. All rights reserved.</footer>
+
+    <script>
+      // Fitur Dark/Light Mode
+      const themeToggle = document.getElementById("theme-toggle");
+      const icon = themeToggle.querySelector("i");
+      const rootElement = document.documentElement;
+
+      const currentTheme = localStorage.getItem("theme") || "dark";
+      rootElement.setAttribute("data-theme", currentTheme);
+
+      if (currentTheme === "dark") {
+        icon.classList.replace("fa-moon", "fa-sun");
+      } else {
+        icon.classList.replace("fa-sun", "fa-moon");
+      }
+
+      themeToggle.addEventListener("click", () => {
+        const activeTheme = rootElement.getAttribute("data-theme");
+        if (activeTheme === "dark") {
+          rootElement.setAttribute("data-theme", "light");
+          localStorage.setItem("theme", "light");
+          icon.classList.replace("fa-sun", "fa-moon");
+        } else {
+          rootElement.setAttribute("data-theme", "dark");
+          localStorage.setItem("theme", "dark");
+          icon.classList.replace("fa-moon", "fa-sun");
+        }
+      });
+
+      // Horizontal Scroll untuk Topik
+      const topikContainer = document.getElementById("topik-container");
+      const scrollLeftBtn = document.getElementById("scroll-left");
+      const scrollRightBtn = document.getElementById("scroll-right");
+      const scrollAmount = 250;
+
+      scrollLeftBtn.addEventListener("click", () => {
+        topikContainer.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+      });
+
+      scrollRightBtn.addEventListener("click", () => {
+        topikContainer.scrollBy({ left: scrollAmount, behavior: "smooth" });
+      });
+
+      // PERBAIKAN LOGIKA: Fungsi untuk menghandle klik tombol kelas mandiri
+      function selectClass(buttonElement, className) {
+        // Hapus status active dari semua tombol kelas terlebih dahulu
+        document.querySelectorAll(".class-select-btn").forEach((btn) => {
+          btn.classList.remove("active");
+        });
+
+        // Tambahkan efek active ke tombol yang sedang diklik
+        buttonElement.classList.add("active");
+
+        // Eksekusi logika kelas (misal: memfilter konten atau mengarahkan halaman)
+        console.log("Kelas terpilih:", className);
+      }
+    </script>
+  </body>
+</html>
