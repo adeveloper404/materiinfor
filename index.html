@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=1200">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adeveloper Learning</title>
     <link
       rel="icon"
@@ -105,11 +104,10 @@
       }
 
       .container {
-    width: 100%;
-    max-width: 1200px; /* Tetap maksimal 1200px di layar besar, tapi mengecil di layar kecil */
-    margin: 0 auto;
-    padding: 0 20px;
-}
+        width: 1200px; /* Diubah menjadi statis agar layout desktop konsisten di semua device */
+        margin: 0 auto;
+        padding: 0 20px;
+      }
 
       /* ================= NAVBAR ================= */
       nav {
@@ -206,7 +204,6 @@
         padding: 140px 20px;
         text-align: center;
         background-color: var(--bg-main);
-        /* Menggabungkan garis grid tipis dengan sorotan cahaya lembut di tengah */
         background-image:
           radial-gradient(
             circle at center,
@@ -239,7 +236,6 @@
         -webkit-text-fill-color: transparent;
       }
 
-      /* PERBAIKAN: Container Geng Tombol Kelas yang Terpisah */
       .class-buttons-container {
         display: flex;
         justify-content: center;
@@ -415,24 +411,12 @@
         color: var(--text-main);
       }
 
-      .topik-card:nth-child(1) i {
-        color: #8b5cf6;
-      }
-      .topik-card:nth-child(2) i {
-        color: #10b981;
-      }
-      .topik-card:nth-child(3) i {
-        color: #f59e0b;
-      }
-      .topik-card:nth-child(4) i {
-        color: #ec4899;
-      }
-      .topik-card:nth-child(5) i {
-        color: #3b82f6;
-      }
-      .topik-card:nth-child(6) i {
-        color: #14b8a6;
-      }
+      .topik-card:nth-child(1) i { color: #8b5cf6; }
+      .topik-card:nth-child(2) i { color: #10b981; }
+      .topik-card:nth-child(3) i { color: #f59e0b; }
+      .topik-card:nth-child(4) i { color: #ec4899; }
+      .topik-card:nth-child(5) i { color: #3b82f6; }
+      .topik-card:nth-child(6) i { color: #14b8a6; }
 
       /* ================= ABOUT & PENGEMBANG ================= */
       .split-section {
@@ -483,11 +467,7 @@
         width: 100%;
         max-width: 320px;
         aspect-ratio: 4 / 3;
-        background: linear-gradient(
-          45deg,
-          var(--bg-surface),
-          var(--bg-control)
-        );
+        background: linear-gradient(45deg, var(--bg-surface), var(--bg-control));
         border: 1px solid var(--border-color);
         border-radius: 24px;
         display: flex;
@@ -569,15 +549,15 @@
       }
 
       .table-wrapper-large iframe {
-    width: 100%;
-    height: 520px;
-    border: none;
-    display: block;
-    border-radius: 14px;
-    background-color: transparent; 
-    filter: var(--sheet-invert);   
-    transition: filter 0.3s ease;
-}
+        width: 100%;
+        height: 520px;
+        border: none;
+        display: block;
+        border-radius: 14px;
+        background-color: transparent; 
+        filter: var(--sheet-invert);   
+        transition: filter 0.3s ease;
+      }
 
       /* ================= FOOTER ================= */
       footer {
@@ -844,17 +824,12 @@
         topikContainer.scrollBy({ left: scrollAmount, behavior: "smooth" });
       });
 
-      // PERBAIKAN LOGIKA: Fungsi untuk menghandle klik tombol kelas mandiri
+      // Fungsi untuk menghandle klik tombol kelas mandiri
       function selectClass(buttonElement, className) {
-        // Hapus status active dari semua tombol kelas terlebih dahulu
         document.querySelectorAll(".class-select-btn").forEach((btn) => {
           btn.classList.remove("active");
         });
-
-        // Tambahkan efek active ke tombol yang sedang diklik
         buttonElement.classList.add("active");
-
-        // Eksekusi logika kelas (misal: memfilter konten atau mengarahkan halaman)
         console.log("Kelas terpilih:", className);
       }
     </script>
