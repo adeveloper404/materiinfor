@@ -27,6 +27,7 @@
       :root[data-theme="dark"] {
         --bg-main: #0b1121;
         --bg-surface: #131e32;
+        --bg-surface-rgb: 19, 30, 50;
         --bg-control: #1e293b;
         --text-main: #f8fafc;
         --text-secondary: #94a3b8;
@@ -46,6 +47,7 @@
       :root[data-theme="light"] {
         --bg-main: #d6e8ff;
         --bg-surface: #ffffff;
+        --bg-surface-rgb: 255, 255, 255;
         --bg-control: #cbd5e1;
         --text-main: #0f172a;
         --text-secondary: #475569;
@@ -78,6 +80,7 @@
       html {
         scroll-behavior: smooth;
         scroll-padding-top: 85px;
+        overflow-x: auto; /* Memastikan scrollbar horizontal muncul jika layar lebih kecil dari 1200px */
       }
 
       body {
@@ -88,6 +91,8 @@
         min-height: 100vh;
         display: flex;
         flex-direction: column;
+        width: 100%; /* PERBAIKAN: Diubah ke 100% agar background nav & footer bisa full ke samping */
+        min-width: 1200px; /* PERBAIKAN: Mengunci batas minimum desktop agar layout tidak rusak saat dikecilkan */
       }
 
       a {
@@ -103,20 +108,30 @@
         display: block;
       }
 
+      /* Container utama pengunci lebar konten tengah */
       .container {
-        width: 1200px; /* Diubah menjadi statis agar layout desktop konsisten di semua device */
+        width: 1200px; /* PERBAIKAN: Dikunci mutlak di 1200px agar sejajar sempurna */
         margin: 0 auto;
-        padding: 0 20px;
+        padding: 0 40px; 
       }
 
       /* ================= NAVBAR ================= */
       nav {
-        background-color: var(--bg-surface);
-        border-bottom: 1px solid var(--border-color);
+        background-color: transparent; 
+        border-bottom: 1px solid transparent;
         position: sticky;
         top: 0;
         z-index: 100;
+        width: 100%; /* Menjamin background membentang penuh tanpa batas */
+        box-shadow: none;
+        transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      nav.scrolled {
+        background-color: rgba(var(--bg-surface-rgb), 0.95);
+        border-bottom: 1px solid var(--border-color);
         box-shadow: var(--shadow-sm);
+        backdrop-filter: blur(8px); 
       }
 
       .nav-container {
@@ -124,6 +139,7 @@
         justify-content: space-between;
         align-items: center;
         height: 75px;
+        /* Padding dihapus dari sini karena sudah ditangani oleh pembungkus .container */
       }
 
       .logo {
@@ -201,7 +217,7 @@
       /* ================= HEADER / HERO ================= */
       header {
         position: relative;
-        padding: 140px 20px;
+        padding: 140px 0;
         text-align: center;
         background-color: var(--bg-main);
         background-image:
@@ -218,6 +234,8 @@
           40px 40px;
         background-position: center;
         border-bottom: 1px solid var(--border-color);
+        margin-top: -75px; 
+        padding-top: 215px; 
       }
 
       .hero-title {
@@ -286,6 +304,7 @@
         border-top: 1px solid var(--border-color);
         border-bottom: 1px solid var(--border-color);
         box-shadow: var(--shadow-sm);
+        width: 100%;
       }
 
       .ticker-inner {
@@ -298,18 +317,15 @@
       }
 
       @keyframes ticker {
-        0% {
-          transform: translate3d(0, 0, 0);
-        }
-        100% {
-          transform: translate3d(-50%, 0, 0);
-        }
+        0% { transform: translate3d(0, 0, 0); }
+        100% { transform: translate3d(-50%, 0, 0); }
       }
 
       /* ================= SECTIONS UMUM ================= */
       section {
         padding: 90px 0;
         border-bottom: 1px solid var(--border-color);
+        width: 100%;
       }
 
       .section-title {
@@ -378,7 +394,7 @@
       }
 
       .topik-card {
-        flex: 0 0 225px;
+        flex: 0 0 225px; 
         aspect-ratio: 1 / 1;
         background-color: var(--bg-surface);
         border: 1px solid var(--border-color);
@@ -562,18 +578,19 @@
       /* ================= FOOTER ================= */
       footer {
         background-color: var(--bg-surface);
-        padding: 35px 20px;
+        padding: 35px 0; /* PERBAIKAN: Padding kanan-kiri diatur ke 0 karena dibungkus .container */
         text-align: center;
         font-family: "JetBrains Mono", monospace;
         font-size: 0.9rem;
         color: var(--text-secondary);
         border-top: 1px solid var(--border-color);
         margin-top: auto;
+        width: 100%; /* PERBAIKAN: Menjamin background footer meluas tanpa batas */
       }
     </style>
   </head>
   <body>
-    <nav>
+    <nav id="navbar">
       <div class="nav-container container">
         <div class="logo">
           <span>Adeveloper</span>
@@ -780,7 +797,11 @@
       </div>
     </section>
 
-    <footer>© 2026 Adeveloper | Adeb Nizhomy. All rights reserved.</footer>
+    <footer id="footer">
+      <div class="container">
+        © 2026 Adeveloper | Adeb Nizhomy. All rights reserved.
+      </div>
+    </footer>
 
     <script>
       // Fitur Dark/Light Mode
@@ -807,6 +828,16 @@
           rootElement.setAttribute("data-theme", "dark");
           localStorage.setItem("theme", "dark");
           icon.classList.replace("fa-moon", "fa-sun");
+        }
+      });
+
+      // Fitur Efek Transparan Navigasi saat Scroll
+      const navbar = document.getElementById("navbar");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add("scrolled");
+        } else {
+          navbar.classList.remove("scrolled");
         }
       });
 
