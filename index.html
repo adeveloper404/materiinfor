@@ -349,27 +349,36 @@
 
       /* ================= TOPIK (SCROLL HORIZONTAL) ================= */
       .topik-wrapper {
-        position: relative;
-        display: flex;
-        align-items: center;
-        gap: 20px;
+        position: relative; /* Menjadi acuan posisi absolut tombol navigasi */
+        display: block;    /* Mengubah ke block agar container bisa memanfaatkan lebar penuh */
+        width: 100%;
       }
 
       .scroll-btn {
         background-color: var(--bg-surface);
         color: var(--text-main);
         border: 1px solid var(--border-color);
-        width: 50px;
-        height: 50px;
+        width: 48px;
+        height: 48px;
         border-radius: 50%;
         cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.1rem;
+        font-size: 1rem;
         box-shadow: var(--shadow-md);
-        z-index: 2;
-        flex-shrink: 0;
+        z-index: 10;
+        position: absolute; /* Mengeluarkan tombol dari baris kartu agar sinkron posisinya */
+        top: calc(50% - 24px); /* Posisinya tepat di tengah secara vertikal */
+      }
+
+      /* Menyinkronkan posisi tombol kiri dan kanan sedikit keluar dari batas container */
+      .scroll-btn.left {
+        left: -24px;
+      }
+
+      .scroll-btn.right {
+        right: -24px;
       }
 
       .scroll-btn:hover {
@@ -384,18 +393,24 @@
         gap: 24px;
         overflow-x: auto;
         scroll-behavior: smooth;
-        scrollbar-width: none;
-        padding: 20px 5px;
+        scrollbar-width: none; /* Sembunyikan scrollbar di Firefox */
+        
+        /* Memberikan padding vertikal (25px) agar animasi hover tidak terpotong,
+           dan padding horizontal (10px) agar sisi luar kartu sejajar rapi */
+        padding: 25px 10px; 
+        
         scroll-snap-type: x mandatory;
+        width: 100%;
       }
 
+      /* Sembunyikan scrollbar di Chrome, Safari, dan Opera */
       .topik-container::-webkit-scrollbar {
         display: none;
       }
 
       .topik-card {
-        flex: 0 0 225px; 
-        aspect-ratio: 1 / 1;
+        flex: 0 0 185px; /* Mengunci lebar kartu */
+        height: 165px;   /* Mengunci tinggi kartu yang pas */
         background-color: var(--bg-surface);
         border: 1px solid var(--border-color);
         border-radius: 20px;
@@ -404,27 +419,34 @@
         align-items: center;
         justify-content: center;
         text-align: center;
-        padding: 24px;
+        padding: 20px 16px;   
         box-shadow: var(--shadow-card);
         scroll-snap-align: start;
         cursor: pointer;
+        will-change: transform, box-shadow;
       }
 
       .topik-card:hover {
         transform: translateY(-8px);
         border-color: var(--accent-primary);
-        box-shadow: 0 20px 25px -5px rgba(37, 99, 235, 0.1);
+        box-shadow: 0 15px 30px rgba(37, 99, 235, 0.25);
       }
 
       .topik-card i {
-        font-size: 2.8rem;
-        margin-bottom: 18px;
+        font-size: 2.2rem;
+        margin-bottom: 12px; 
       }
 
       .topik-card h3 {
-        font-size: 1.05rem;
+        font-size: 0.9rem; 
         font-weight: 700;
         color: var(--text-main);
+        line-height: 1.35;
+        display: -webkit-box;
+        line-clamp: 2;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
       }
 
       .topik-card:nth-child(1) i { color: #8b5cf6; }
@@ -634,7 +656,7 @@
         <div class="class-buttons-container">
           <button
             class="class-select-btn"
-            onclick="selectClass(this, 'Kelas X'); window.open('https://google.com', '_blank');"
+            onclick="selectClass(this, 'Kelas X'); window.open('materi/kelasx.html', '_blank');"
           >
             <i class="fa-solid fa-graduation-cap"></i> Kelas X
           </button>
@@ -736,13 +758,7 @@
           <div class="split-content">
             <h2>About</h2>
             <p>
-              Web Informatika Edukasi adalah platform digital yang dirancang
-              khusus untuk memfasilitasi pembelajaran mata pelajaran Informatika.
-            </p>
-            <p>
-              Dikembangkan oleh Adeb Nizhomy, Guru Mapel Informatika, untuk
-              mendukung proses belajar mengajar yang lebih efektif, terstruktur,
-              dan mudah diakses dari mana saja.
+              Web Informatika Edukasi adalah platform digital yang dirancang untuk mendukung pembelajaran mata pelajaran Informatika secara efektif, terstruktur, dan mudah diakses kapan saja serta dari mana saja. Platform ini dikembangkan oleh Adeb Nizhomy, guru mata pelajaran Informatika, sebagai media pembelajaran yang membantu mempermudah proses belajar mengajar bagi guru maupun peserta didik.
             </p>
           </div>
           <div class="split-image-container">
