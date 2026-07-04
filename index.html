@@ -80,7 +80,7 @@
       html {
         scroll-behavior: smooth;
         scroll-padding-top: 85px;
-        overflow-x: auto; /* Memastikan scrollbar horizontal muncul jika layar lebih kecil dari 1200px */
+        overflow-x: auto;
       }
 
       body {
@@ -91,8 +91,8 @@
         min-height: 100vh;
         display: flex;
         flex-direction: column;
-        width: 100%; /* PERBAIKAN: Diubah ke 100% agar background nav & footer bisa full ke samping */
-        min-width: 1200px; /* PERBAIKAN: Mengunci batas minimum desktop agar layout tidak rusak saat dikecilkan */
+        width: 100%;
+        min-width: 1200px;
       }
 
       a {
@@ -108,9 +108,8 @@
         display: block;
       }
 
-      /* Container utama pengunci lebar konten tengah */
       .container {
-        width: 1200px; /* PERBAIKAN: Dikunci mutlak di 1200px agar sejajar sempurna */
+        width: 1200px;
         margin: 0 auto;
         padding: 0 40px; 
       }
@@ -122,7 +121,7 @@
         position: sticky;
         top: 0;
         z-index: 100;
-        width: 100%; /* Menjamin background membentang penuh tanpa batas */
+        width: 100%;
         box-shadow: none;
         transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
       }
@@ -139,7 +138,6 @@
         justify-content: space-between;
         align-items: center;
         height: 75px;
-        /* Padding dihapus dari sini karena sudah ditangani oleh pembungkus .container */
       }
 
       .logo {
@@ -349,8 +347,8 @@
 
       /* ================= TOPIK (SCROLL HORIZONTAL) ================= */
       .topik-wrapper {
-        position: relative; /* Menjadi acuan posisi absolut tombol navigasi */
-        display: block;    /* Mengubah ke block agar container bisa memanfaatkan lebar penuh */
+        position: relative; 
+        display: block;    
         width: 100%;
       }
 
@@ -368,11 +366,10 @@
         font-size: 1rem;
         box-shadow: var(--shadow-md);
         z-index: 10;
-        position: absolute; /* Mengeluarkan tombol dari baris kartu agar sinkron posisinya */
-        top: calc(50% - 24px); /* Posisinya tepat di tengah secara vertikal */
+        position: absolute; 
+        top: calc(50% - 24px); 
       }
 
-      /* Menyinkronkan posisi tombol kiri dan kanan sedikit keluar dari batas container */
       .scroll-btn.left {
         left: -24px;
       }
@@ -393,24 +390,19 @@
         gap: 24px;
         overflow-x: auto;
         scroll-behavior: smooth;
-        scrollbar-width: none; /* Sembunyikan scrollbar di Firefox */
-        
-        /* Memberikan padding vertikal (25px) agar animasi hover tidak terpotong,
-           dan padding horizontal (10px) agar sisi luar kartu sejajar rapi */
+        scrollbar-width: none; 
         padding: 25px 10px; 
-        
         scroll-snap-type: x mandatory;
         width: 100%;
       }
 
-      /* Sembunyikan scrollbar di Chrome, Safari, dan Opera */
       .topik-container::-webkit-scrollbar {
         display: none;
       }
 
       .topik-card {
-        flex: 0 0 185px; /* Mengunci lebar kartu */
-        height: 165px;   /* Mengunci tinggi kartu yang pas */
+        flex: 0 0 185px; 
+        height: 165px;   
         background-color: var(--bg-surface);
         border: 1px solid var(--border-color);
         border-radius: 20px;
@@ -600,14 +592,14 @@
       /* ================= FOOTER ================= */
       footer {
         background-color: var(--bg-surface);
-        padding: 35px 0; /* PERBAIKAN: Padding kanan-kiri diatur ke 0 karena dibungkus .container */
+        padding: 35px 0; 
         text-align: center;
         font-family: "JetBrains Mono", monospace;
         font-size: 0.9rem;
         color: var(--text-secondary);
         border-top: 1px solid var(--border-color);
         margin-top: auto;
-        width: 100%; /* PERBAIKAN: Menjamin background footer meluas tanpa batas */
+        width: 100%; 
       }
     </style>
   </head>
@@ -656,19 +648,19 @@
         <div class="class-buttons-container">
           <button
             class="class-select-btn"
-            onclick="selectClass(this, 'Kelas X'); window.open('materi/kelasx.html', '_blank');"
+            onclick="selectClass(this, 'Kelas X'); window.open('kelasx.html');"
           >
             <i class="fa-solid fa-graduation-cap"></i> Kelas X
           </button>
           <button
             class="class-select-btn"
-            onclick="selectClass(this, 'Kelas XI')"
+            onclick="selectClass(this, 'Kelas X'); window.open('kelasxi.html');"
           >
             <i class="fa-solid fa-graduation-cap"></i> Kelas XI
           </button>
           <button
             class="class-select-btn"
-            onclick="selectClass(this, 'Kelas XII')"
+            onclick="selectClass(this, 'Kelas X'); window.open('kelasxii.html');"
           >
             <i class="fa-solid fa-graduation-cap"></i> Kelas XII
           </button>
@@ -743,7 +735,6 @@
         <div class="table-wrapper-large">
           <div class="embed-responsive-container">
             <iframe
-            
               src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ4ODeXrrkCv8QM-ThPqlhX8csXQQbK276KDsebJeJUooNvxhz0ucNpq5oDRXsOfoWvB_UvOg2oVafa/pubhtml?gid=1346901625&single=true&widget=false&headers=false&chrome=false"
             >
             </iframe>
@@ -853,6 +844,31 @@
         buttonElement.classList.add("active");
         console.log("Kelas terpilih:", className);
       }
+
+      // ================= FITUR SCROLL SPY DINAMIS (GARIS BIRU OTOMATIS) =================
+      const sections = document.querySelectorAll("header, section");
+      const navLinks = document.querySelectorAll(".nav-links a");
+
+      window.addEventListener("scroll", () => {
+        let currentSectionId = "home";
+
+        sections.forEach((section) => {
+          const sectionTop = section.offsetTop;
+          // Menggunakan offset toleransi 120px agar perpindahan terasa halus sebelum section menyentuh layar atas
+          if (window.scrollY >= sectionTop - 120) {
+            currentSectionId = section.getAttribute("id");
+          }
+        });
+
+        navLinks.forEach((link) => {
+          link.classList.remove("active");
+          const targetHref = link.getAttribute("href");
+          
+          if (targetHref === `#${currentSectionId}` || (currentSectionId === "home" && targetHref === "#")) {
+            link.classList.add("active");
+          }
+        });
+      });
     </script>
   </body>
 </html>
