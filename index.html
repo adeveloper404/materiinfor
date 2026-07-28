@@ -519,6 +519,7 @@
 
       .blueprint-form-group select,
       .blueprint-form-group textarea,
+      .blueprint-form-group input[type="text"],
       .blueprint-form-group input[type="file"] {
         width: 100%;
         padding: 14px 18px;
@@ -534,6 +535,7 @@
 
       .blueprint-form-group select:focus,
       .blueprint-form-group textarea:focus,
+      .blueprint-form-group input[type="text"]:focus,
       .blueprint-form-group input[type="file"]:focus {
         border-color: var(--accent-primary);
         box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
@@ -956,6 +958,16 @@
                 </select>
               </div>
 
+              <!-- Input Manual Nama Tersembunyi -->
+              <div class="blueprint-form-group" id="input-nama-manual-group" style="display: none;">
+                <input 
+                  type="text" 
+                  id="nama_manual" 
+                  name="nama_manual" 
+                  placeholder="Ketikkan Nama Lengkap Anda..." 
+                />
+              </div>
+
               <div class="blueprint-form-group">
                 <textarea id="keterangan" name="keterangan" placeholder="Keterangan" required></textarea>
               </div>
@@ -1145,20 +1157,198 @@
 
       // ================= DATA FILTER DROPDOWN NAMA SISWA =================
       const dataSiswa = {
-        "X-1": ["Ahmad Fauzi", "Budi Santoso", "Citra Lestari", "Dina Mariana"],
-        "X-2": ["Eko Prasetyo", "Fany Rahmawati", "Gilang Permana", "Hendra Wijaya"],
-        "X-3": ["Indah Permata", "Joko Susilo", "Kurniawan", "Larasati"],
-        "X-4": ["Muhammad Rian", "Nabila Putri", "Oki Setiawan", "Putri Utami"],
+        "X-1": [
+          "ADINDA DEWI MELYANI",
+          "AHMAD UBAIDILLAH",
+          "AISYAH LATHIFAH AZKA",
+          "AL-HAFIDZ FATTAH DZITHTHAULI",
+          "ALLUNA FAYYAZA ZAHRA",
+          "ALVIAN FIRMANSYAH",
+          "ANISA WULAN FEBRIANTY",
+          "AURELLIA NATSYA ADNA PUTRI",
+          "CARISSA ALTHAFUNNISA",
+          "CHERILLYA ZAUHARA JACINDA",
+          "DAVINA PUSPITA AMBARUKMI",
+          "DINDA KHOIRUNISA AZKA",
+          "FAHRI AVAN MAHARDIKA",
+          "FAIRUZ MAULIDYA",
+          "FAIZ FARAH FADILLAH",
+          "FEBRIANA EKA RAHMAWATI",
+          "FILZAH DIIN DA MUKARROMAH",
+          "GEOVANNO EKA RACHMAN",
+          "GITA RAKHMA MARDIYANA",
+          "HAYDAR FAIQ LIANAM PUTRA",
+          "LITHEZA RAEN AZURA",
+          "MICHAEL ERWIN GUNAWAN",
+          "MUHAMMAD ARIF SAPUTRA",
+          "NAJWA HATIFIDA SUHADAK",
+          "NAOMI QAYYUM SABILILLAH",
+          "RAFFI ANANDA PUTRA",
+          "RAIHAN PUTRA HARYANTO",
+          "RAYHAN ZAIN APRILIANO",
+          "SATRIA ARDITYA RAMADHAN",
+          "SATRIA MAHARDIKA",
+          "VITO DESYANO ARKANANTA",
+          "WILDA AULIA"
+        ],
+        "X-2": [
+          "ADINDA ISLAMIYAH",
+          "ALEXA ZHALZA ZAHIRA",
+          "ALVIN GHULAM TAUFIQUROHMAN",
+          "ALVINO ILHAMSYAH IS HARYONO",
+          "AMIRAH SYAILENDRA ACHMAD",
+          "ARYA RAHMADTULLAH PRATAMA",
+          "ATHA IZDIHAR AL-JAVIER",
+          "AZIZAH ZAKKIYAH NUR AMALIA",
+          "BIMA FAJAR ANDHIKA",
+          "BUNGA MEYSHA EVYLIN",
+          "DHEAN AFIAN MAULIDIN RAHMATULLOH",
+          "ENOLA DANDITO RASYANDA ATMADJA",
+          "FAIZ RAMADHAN",
+          "FELISA PUTRI RAMADHANI",
+          "FERENDA BAGUS SATRIA",
+          "GEISHA MAHARANI",
+          "IAN ANTONIO FERDIANSYAH",
+          "JASMINE DAVINA AS'SYIFA",
+          "JULIET VANESA RAHMADHANY",
+          "KEYLA AYU NIRMALA",
+          "MEYSHA EVELLYNA SUWARNA",
+          "MUCHAMMAD DAVA ALMUAZAM",
+          "MUHAMMAD CHOIRUL AZZAM FIRDAUS",
+          "MUHAMMAD EVAN ARIYANTO",
+          "NABILA AZWADYTA",
+          "RAFFA OKTAWARDANA",
+          "RIZKY CHRISTIAN RAMMADAN",
+          "SAYIDIN FARIS HIDAYATULLAH",
+          "SEKAR AYU DEWANDARI",
+          "SHINRA HADI RAMADHAN",
+          "SYRIN DEWI NUR ANUGRAH",
+          "TITHANIA BIMBI ZHAFIRAH",
+          "VALYA SABRINA SISWANA PUTRI"
+        ],
+        "X-3": [
+          "AHMAD NURIEL IBRAHIMOVIC",
+          "ALFI ZAHRO WARDANA",
+          "ALICIA TABITHA SETIAWAN",
+          "ANGELYN RACHEL SANTOSA",
+          "AZAM SOLAHIDIN",
+          "CHELSEA ALIFIA RENDIANY",
+          "CHINTIA SULISTYA NINGRUM",
+          "CHRYSTIAN BAGAS ADI SYAHPUTRA",
+          "DANENDRA ARYAPUTRA YAHYA",
+          "DEVINTA NOVIANTI",
+          "ELAIN LOCITA CANDRANI",
+          "FAKHIRA EKA FRESTYA",
+          "FATHI",
+          "HUBERTA EMILLIA SILVIA WIBOWO",
+          "JULIA ANGGRAENY",
+          "KAYLA QORIROH SALSABILA",
+          "KRISTANTO AGUS SAPUTRA",
+          "MIRZA ARKANA RAJENDRA",
+          "MUHAMMAD WAHIDIN AL-HAFIDZ",
+          "NABILA MAYLA FAIZA",
+          "NATANAEL DESTYN ENDA CHRISTANYA",
+          "NAYLA DWI ANGGRAINI",
+          "OKALINA SAFA HERMAWAN",
+          "PRAWIRA HARLIM",
+          "RAFKY AL-FARIZI ADITYA GUNTORO",
+          "REVATUL AINI SYAFINDRA PUTRI",
+          "SALSABILA NAQIYYAH",
+          "SASONO HANDITO",
+          "SATRIA ASA WIBAWA",
+          "STANLEY PUTRA ANDRIANTO",
+          "UBAIDILLAH TSABBIT",
+          "WIDYA BINAR CAHAYA RAMADHANI"
+        ],
+        "X-4": [
+          "AKBAR MAULANA WACHID",
+          "ARVA FIRMANSYAH HABIBI",
+          "AYATULLOH FIKRU AL AKBAR ROCHMATULANI",
+          "AYRA RACHMAWATI",
+          "AZARIA AZFA RANIA KURNIAWAN",
+          "CHINTYA RAMADHANI DWI DIVA",
+          "CLARANIA NAURA AZ-ZAHRA",
+          "DAFFA RAHMADHANI",
+          "ELANO ZEKI ARMAGAN",
+          "FABRIAN LEKSONO PUTRA",
+          "IKARY RAYHAN RAMADHANI ERWANSYAH",
+          "ISNAINING AZWA ASYAROH",
+          "JAZIRA AISYAHAWA ANASZELSY SANTOSO",
+          "KAYLA LIVIA PAVITA MYRA",
+          "LUCKY LANGIT ADI PUTRA WIBOWO",
+          "MOCHAMMAD EDGAR ABIGAEEL",
+          "MOCHAMMAD FADHYL SETIA PAMBUDI",
+          "MUHAMMAD MALIK FAHAD",
+          "MUHAMMAD ZAIDAN ALI AKBAR FIRMANSYAH",
+          "MUHAMMAD ZIDAN PRAYOGA",
+          "NABILA PUTRI PERMANA",
+          "NAJWA KAYLA RAMADHANI",
+          "NATASYA USWATUN HASANAH",
+          "NAYSILLA KEYZHA AZAHRA",
+          "NUR YASMIN",
+          "RAFA RACHMAD RIZKILLAH",
+          "REDHO RAHMAD RAMDANI",
+          "SABRINA AULIA SELVIRA",
+          "SHAFIRA PUTRI RAMADHANI",
+          "SYAHRUL RACHMAT RAMADHAN",
+          "VIKA PUTRI ARIYANI",
+          "YUNITA SARI",
+          "ZAKI NAFWAL ALI WIBOWO",
+          "ZIVANA KEZIA FIRDAUS"
+        ],
         "XI-2": ["Rizky Aditya", "Siti Aminah", "Taufik Hidayat", "Vina Panduwinata"],
-        "XII-2": ["Wahyu Hidayat", "Yayan Ruhiyan", "Zaskia Gotik"]
+        "XII-2": [
+          "ACHMAD ALDYANSYAH MARDIONO",
+          "AFIFATHUL AZIZAH SETIAWAN",
+          "AHMAD KHOIRUL RIZAL",
+          "AISYAH NUR ALDINA",
+          "ALFIRA RIZKI NOVIYANTI",
+          "ALMIRA WEYSHIKAR WARDANI",
+          "AQIEL RABBANY",
+          "ARSY APRILIA RINATI",
+          "AULIA DWI NOFITASARI",
+          "AURELIA CENDIKA PUTRI",
+          "DIMAS DARMAWAN",
+          "DJENAR MAHESA AYU",
+          "ERLANGGA PUTRA ADIGUNA",
+          "ERNEST PRICHYA YUNIAR",
+          "FATHIR NUR RAYHAN HAFIDZ",
+          "GALANG RISTIYANTO",
+          "HALIMATUS SA'DIYYAH",
+          "HANDIKA PUTRA MAULANA",
+          "HANUN AISYA MUJAHIDAH",
+          "HUMAYYAH",
+          "MIFTAQUL QUSNAH",
+          "MIKO SETIAWAN",
+          "MIRZHA REZAUL KHARIM",
+          "MUHAMMAD ANSHAR FARREL V.",
+          "MUHAMMAD FARHAT AUFA NI'AM",
+          "NAJMI QORISU ASMARADEA",
+          "NI LUH AJENG DIANTARINI",
+          "OKTAVIAN ZAKIN WIDYA WICAKSONO",
+          "RAMA WICAKSANA",
+          "REIVANT FEBRIANO PERMANA PUTERA",
+          "SALWA WADON PRATAMA",
+          "SRIREJEKI WIHARTANTI ARTAWIJAYA",
+          "SYABIA DESSRINDA",
+          "VICHA DESTRI AULIA",
+          "YANUAR ILMY MUTTAQIN"
+        ]
       };
 
       const kelasSelect = document.getElementById("kelas");
       const namaSelect = document.getElementById("nama");
+      const namaManualGroup = document.getElementById("input-nama-manual-group");
+      const namaManualInput = document.getElementById("nama_manual");
 
       kelasSelect.addEventListener("change", function() {
         const kelasTerpilih = this.value;
         namaSelect.innerHTML = "";
+        
+        // Reset input manual jika kelas diubah
+        namaManualGroup.style.display = "none";
+        namaManualInput.required = false;
+        namaManualInput.value = "";
 
         if (dataSiswa[kelasTerpilih]) {
           const defaultOpt = document.createElement("option");
@@ -1174,6 +1364,12 @@
             opt.textContent = nama;
             namaSelect.appendChild(opt);
           });
+
+          // Tambahkan opsi nama tidak ada
+          const otherOpt = document.createElement("option");
+          otherOpt.value = "LAINNYA";
+          otherOpt.textContent = "➕ Nama Saya Tidak Ada (Isi Manual)";
+          namaSelect.appendChild(otherOpt);
         } else {
           const opt = document.createElement("option");
           opt.value = "";
@@ -1184,6 +1380,17 @@
         }
       });
 
+      // Toggle penampakan input manual saat opsi "LAINNYA" dipilih
+      namaSelect.addEventListener("change", function () {
+        if (this.value === "LAINNYA") {
+          namaManualGroup.style.display = "block";
+          namaManualInput.required = true;
+        } else {
+          namaManualGroup.style.display = "none";
+          namaManualInput.required = false;
+          namaManualInput.value = "";
+        }
+      });
 
       // ================= LOGIK INTEGRASI GOOGLE DRIVE & SHEET =================
       const form = document.getElementById('uploadForm');
@@ -1199,7 +1406,12 @@
 
       form.addEventListener('submit', function(e) {
           e.preventDefault();
-          const nama = document.getElementById('nama').value;
+          
+          let nama = namaSelect.value;
+          if (nama === "LAINNYA") {
+              nama = namaManualInput.value.trim();
+          }
+
           const kelas = document.getElementById('kelas').value;
           const keterangan = document.getElementById('keterangan').value.trim();
           const file = document.getElementById('file').files[0];
@@ -1245,6 +1457,8 @@
                       statusDiv.innerHTML = `<span class="success-message">File berhasil diunggah! <a href="${data.fileUrl}" target="_blank" style="color: var(--accent-primary); text-decoration: underline; font-weight: 700;">Lihat File</a></span>`;
                       form.reset();
                       namaSelect.innerHTML = '<option value="" disabled selected>-- Pilih Nama --</option>';
+                      namaManualGroup.style.display = "none";
+                      namaManualInput.required = false;
                   } else {
                       throw new Error(data.message || 'Unknown error');
                   }
