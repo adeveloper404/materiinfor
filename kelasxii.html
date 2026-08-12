@@ -466,6 +466,49 @@
       .c-8 i { color: #a855f7; }
       .c-9 i { color: #06b6d4; }
 
+      /* ================= SECTION HASIL TUGAS SISWA ================= */
+      .tugas-btn-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+      }
+
+      .tugas-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background-color: var(--bg-surface);
+        color: var(--text-main);
+        border: 2px solid var(--accent-primary);
+        padding: 16px 36px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        font-family: "Inter", sans-serif;
+        border-radius: 16px;
+        box-shadow: var(--shadow-card);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .tugas-btn i {
+        font-size: 1.4rem;
+        color: var(--accent-primary);
+        transition: transform 0.3s ease, color 0.3s ease;
+      }
+
+      .tugas-btn:hover {
+        background-color: var(--accent-primary);
+        color: #ffffff;
+        transform: translateY(-4px);
+        box-shadow: 0 12px 25px rgba(37, 99, 235, 0.35);
+      }
+
+      .tugas-btn:hover i {
+        color: #ffffff;
+        transform: scale(1.15);
+      }
+
       /* ================= POPUP COMING SOON MODAL ================= */
       .popup-overlay {
         position: fixed;
@@ -610,7 +653,7 @@
     </style>
   </head>
   <body>
-    <!-- POPUP COMING SOON ELEMENT[cite: 4] -->
+    <!-- POPUP COMING SOON ELEMENT -->
     <div class="popup-overlay" id="coming-soon-popup">
       <div class="popup-content">
         <div class="popup-icon">
@@ -634,6 +677,7 @@
           <li><a href="#" class="active">Home</a></li>
           <li><a href="#materi">Materi</a></li>
           <li><a href="#about">About</a></li>
+          <li><a href="#tugas">Hasil Tugas</a></li>
         </ul>
         <div>
           <button
@@ -829,6 +873,23 @@
       </div>
     </section>
 
+    <!-- SECTION HASIL TUGAS SISWA -->
+    <section id="tugas">
+      <div class="container">
+        <h2 class="section-title">Hasil Tugas Siswa</h2>
+        <div class="tugas-btn-container">
+          <a
+            href="https://drive.google.com/drive/folders/1oULTQ42IK5EKYV1-KtofWLyOneDgDP2Y?usp=drive_link"
+            target="_blank"
+            class="tugas-btn"
+          >
+            <i class="fab fa-google-drive"></i>
+            <span>Lihat Folder Tugas Siswa</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
     <section id="about">
       <div class="container">
         <div class="split-section">
@@ -908,7 +969,7 @@
         }
       });
 
-      // Fungsi Kontrol Modal Popup Coming Soon[cite: 4]
+      // Fungsi Kontrol Modal Popup Coming Soon
       const popup = document.getElementById("coming-soon-popup");
 
       function showComingSoon() {
