@@ -468,6 +468,51 @@
       .c-10 i { color: #f43f5e; }
       .c-11 i { color: #10b981; }
 
+      /* ================= SECTION HASIL TUGAS SISWA ================= */
+      .tugas-btn-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+        gap: 20px; /* Tambahan untuk memberikan jarak antar tombol */
+        flex-wrap: wrap; /* Tambahan agar merespons secara otomatis ketika lebar layar mengecil */
+      }
+
+      .tugas-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        background-color: var(--bg-surface);
+        color: var(--text-main);
+        border: 2px solid var(--accent-primary);
+        padding: 16px 36px;
+        font-size: 1.1rem;
+        font-weight: 700;
+        font-family: "Inter", sans-serif;
+        border-radius: 16px;
+        box-shadow: var(--shadow-card);
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .tugas-btn i {
+        font-size: 1.4rem;
+        color: var(--accent-primary);
+        transition: transform 0.3s ease, color 0.3s ease;
+      }
+
+      .tugas-btn:hover {
+        background-color: var(--accent-primary);
+        color: #ffffff;
+        transform: translateY(-4px);
+        box-shadow: 0 12px 25px rgba(37, 99, 235, 0.35);
+      }
+
+      .tugas-btn:hover i {
+        color: #ffffff;
+        transform: scale(1.15);
+      }
+
       /* ================= POPUP COMING SOON MODAL ================= */
       .popup-overlay {
         position: fixed;
@@ -636,6 +681,7 @@
           <li><a href="#" class="active">Home</a></li>
           <li><a href="#materi">Materi</a></li>
           <li><a href="#about">About</a></li>
+          <li><a href="#tugas">Hasil Tugas</a></li>
         </ul>
         <div>
           <button
@@ -718,7 +764,6 @@
           <div class="flow-item left">
             <div class="flow-badge">03</div>
             <div class="flow-card c-7" onclick="showComingSoon()">
-            <!-- <div class="flow-card c-3" onclick="window.open('https://sites.google.com/view/informatika404/cover/ms-office/excel-002', '_blank')"> -->
               <div class="flow-icon-title">
                 <i class="fas fa-table"></i>
                 <div>
@@ -734,7 +779,6 @@
           <div class="flow-item right">
             <div class="flow-badge">04</div>
             <div class="flow-card c-7" onclick="showComingSoon()">
-            <!-- <div class="flow-card c-4" onclick="window.open('https://sites.google.com/view/informatika404/bk-2-sssq', '_blank')"> -->
               <div class="flow-icon-title">
                 <i class="fas fa-database"></i>
                 <div>
@@ -750,7 +794,6 @@
           <div class="flow-item left">
             <div class="flow-badge">05</div>
             <div class="flow-card c-7" onclick="showComingSoon()">
-            <!-- <div class="flow-card c-5" onclick="window.open('https://sites.google.com/view/informatika404/siskom-komponen-komp', '_blank')"> -->
               <div class="flow-icon-title">
                 <i class="fas fa-microchip"></i>
                 <div>
@@ -766,7 +809,6 @@
           <div class="flow-item right">
             <div class="flow-badge">06</div>
             <div class="flow-card c-7" onclick="showComingSoon()">
-            <!-- <div class="flow-card c-6" onclick="window.open('materi/jaringan.html', '_blank')"> -->
               <div class="flow-icon-title">
                 <i class="fas fa-network-wired"></i>
                 <div>
@@ -782,7 +824,6 @@
           <div class="flow-item left">
             <div class="flow-badge">07</div>
             <div class="flow-card c-7" onclick="showComingSoon()">
-              <!-- <div class="flow-card c-6" onclick="window.open('https://sites.google.com/view/informatika404/ka-001', '_blank')"> -->
               <div class="flow-icon-title">
                 <i class="fas fa-robot"></i>
                 <div>
@@ -798,7 +839,6 @@
           <div class="flow-item right">
             <div class="flow-badge">08</div>
             <div class="flow-card c-8" onclick="showComingSoon()">
-            <!-- <div class="flow-card c-6" onclick="window.open('https://sites.google.com/view/informatika404/cover/gw-cover/googleworkspace-001', '_blank')"> -->
               <div class="flow-icon-title">
                 <i class="fab fa-google"></i>
                 <div>
@@ -814,7 +854,6 @@
           <div class="flow-item left">
             <div class="flow-badge">09</div>
             <div class="flow-card c-9" onclick="showComingSoon()">
-            <!-- <div class="flow-card c-6" onclick="window.open('https://sites.google.com/view/informatika404/cover/gw-cover/googleworkspace-002', '_blank')"> -->
               <div class="flow-icon-title">
                 <i class="fas fa-globe"></i>
                 <div>
@@ -830,7 +869,6 @@
           <div class="flow-item right">
             <div class="flow-badge">10</div>
             <div class="flow-card c-10" onclick="showComingSoon()">
-            <!-- <div class="flow-card c-6" onclick="window.open('https://sites.google.com/view/informatika404/cover/ms-office/word-001', '_blank')"> -->
               <div class="flow-icon-title">
                 <i class="fas fa-file-alt"></i>
                 <div>
@@ -857,6 +895,54 @@
             </div>
           </div>
 
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION HASIL TUGAS SISWA -->
+    <section id="tugas">
+      <div class="container">
+        <h2 class="section-title">Hasil Tugas Siswa</h2>
+        <div class="tugas-btn-container">
+          <!-- Tombol Kelas X Merdeka 1 -->
+          <a
+            href="https://drive.google.com/drive/folders/1QalqLc6cbQB6QkcMuUXW1xwa8kkUjprj?usp=drive_link"
+            target="_blank"
+            class="tugas-btn"
+          >
+            <i class="fab fa-google-drive"></i>
+            <span>X Merdeka 1</span>
+          </a>
+          
+          <!-- Tombol Kelas X Merdeka 2 -->
+          <a
+            href="https://drive.google.com/drive/folders/1nG_QW-wGIQA4aknPlqx3oFI5CAA0zZVx?usp=drive_link"
+            target="_blank"
+            class="tugas-btn"
+          >
+            <i class="fab fa-google-drive"></i>
+            <span>X Merdeka 2</span>
+          </a>
+          
+          <!-- Tombol Kelas X Merdeka 3 -->
+          <a
+            href="https://drive.google.com/drive/folders/1oC4to3djebSELE6BBmGnzWB6z4640IFR?usp=drive_link"
+            target="_blank"
+            class="tugas-btn"
+          >
+            <i class="fab fa-google-drive"></i>
+            <span>X Merdeka 3</span>
+          </a>
+          
+          <!-- Tombol Kelas X Merdeka 4 -->
+          <a
+            href="https://drive.google.com/drive/folders/1PoSpOMs1VlwfKJVbGCIR8rTd3ZGnfVzt?usp=drive_link"
+            target="_blank"
+            class="tugas-btn"
+          >
+            <i class="fab fa-google-drive"></i>
+            <span>X Merdeka 4</span>
+          </a>
         </div>
       </div>
     </section>
